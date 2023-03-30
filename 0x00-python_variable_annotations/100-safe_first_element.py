@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """100-safe_first_element module
 """
 from typing import Any, Sequence, Union

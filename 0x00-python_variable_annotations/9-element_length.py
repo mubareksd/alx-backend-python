@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """9-element_length module
 """
 from typing import List, Tuple

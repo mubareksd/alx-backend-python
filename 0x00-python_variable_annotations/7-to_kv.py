@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """7-to_kv module
 """
 from typing import Union, Tuple

@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """8-make_multiplier module
 """
 from typing import Callable
