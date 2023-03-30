@@ -3,10 +3,10 @@
 
 def floor(n: float) -> int:
     """floor function
-    
+
     Args:
         n (float): number to floor
-    
+
     Returns:
         int: floored number
     """
