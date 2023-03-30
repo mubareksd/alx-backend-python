@@ -130,3 +130,4 @@ dmypy.json
 
 # Local
 *-main.py
+.tool-versions
