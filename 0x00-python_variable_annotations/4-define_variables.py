@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""4-define_variables module
+"""
 
 
 a: int = 1

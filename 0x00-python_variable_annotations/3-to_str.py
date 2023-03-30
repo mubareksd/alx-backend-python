@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""3-to_str module
+"""
 
 
 def to_str(n: float) -> str:

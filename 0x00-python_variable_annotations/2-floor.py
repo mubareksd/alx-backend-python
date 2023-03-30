@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""2-floor module
+"""
 
 
 def floor(n: float) -> int:

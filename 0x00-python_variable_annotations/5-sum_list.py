@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+"""5-sum_list module
+"""
 from typing import List
 
 
