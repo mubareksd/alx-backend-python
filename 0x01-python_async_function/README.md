@@ -1,1 +1,5 @@
-# 0x01-python_async_function
+# 0x01. Python - Async
+
+| TASK                   | FILE                                                 | DESCRIPTION                                                                                                                                                                                                                                                                                                                      |
+|------------------------|------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| 0. The basics of async | [0-basic_async_syntax.py](./0-basic_async_syntax.py) | Write a function (do not create an async function, use the regular function syntax to do this) named wait_random that takes in an integer argument (max_delay, with a default value of 10) named wait_random that waits for a random delay between 0 and max_delay (included and float value) seconds and eventually returns it. |
