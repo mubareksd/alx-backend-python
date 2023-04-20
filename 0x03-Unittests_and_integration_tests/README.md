@@ -3,3 +3,4 @@
 | TASK                        | FILE                           | DESCRIPTION |
 | --------------------------- | ------------------------------ | ----------- |
 | 0. Parameterize a unit test | [test_utils.py](test_utils.py) |             |
+| 1. Parameterize a unit test | [test_utils.py](test_utils.py) |             |
