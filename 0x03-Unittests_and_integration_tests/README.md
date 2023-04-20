@@ -1,1 +1,5 @@
 # 0x03-Unittests_and_integration_tests
+
+| TASK                        | FILE                           | DESCRIPTION |
+| --------------------------- | ------------------------------ | ----------- |
+| 0. Parameterize a unit test | [test_utils.py](test_utils.py) |             |
