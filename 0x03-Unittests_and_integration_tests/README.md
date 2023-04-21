@@ -4,3 +4,4 @@
 | --------------------------- | ------------------------------ | ----------- |
 | 0. Parameterize a unit test | [test_utils.py](test_utils.py) |             |
 | 1. Parameterize a unit test | [test_utils.py](test_utils.py) |             |
+| 2. Mock HTTP calls          | [test_utils.py](test_utils.py) |             |
