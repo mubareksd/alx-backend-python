@@ -42,7 +42,7 @@ class TestGithubOrgClient(unittest.TestCase):
     @patch('client.get_json')
     def test_public_repos(self, mock_get_json):
         """test_public_repos function
-        
+
         Args:
             mock_get_json ([type]): [description]
         """
@@ -57,6 +57,15 @@ class TestGithubOrgClient(unittest.TestCase):
             self.assertEqual(client.public_repos(),
                              ["truth", "ruby-openid-apps-discovery"])
             mock_get_json.assert_called_once()
+
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False)
+    ])
+    def test_has_license(self, repo, key, expected):
+        """test_has_license function
+        """
+        self.assertEqual(GithubOrgClient.has_license(repo, key), expected)
 
 
 if __name__ == "__main__":
