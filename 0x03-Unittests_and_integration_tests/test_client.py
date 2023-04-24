@@ -64,6 +64,11 @@ class TestGithubOrgClient(unittest.TestCase):
     ])
     def test_has_license(self, repo, key, expected):
         """test_has_license function
+
+        Args:
+            repo ([type]): [description]
+            key ([type]): [description]
+            expected ([type]): [description]
         """
         self.assertEqual(GithubOrgClient.has_license(repo, key), expected)
 
