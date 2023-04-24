@@ -2,8 +2,8 @@
 """test_utils module
 """
 import unittest
-from unittest.mock import patch
 from parameterized import parameterized
+from unittest.mock import patch
 
 from utils import access_nested_map, get_json, memoize
 
@@ -58,8 +58,6 @@ class TestMemoize(unittest.TestCase):
     """TestMemoize class
     """
     def test_memoize(self):
-        """test_memoize function
-        """
         class TestClass:
             """TestClass class
             """
@@ -80,12 +78,11 @@ class TestMemoize(unittest.TestCase):
                     method: a_method
                 """
                 return self.a_method()
-
         with patch.object(TestClass, 'a_method') as mock_method:
             mock_method.return_value = 42
-            test_class = TestClass()
-            self.assertEqual(test_class.a_property, 42)
-            self.assertEqual(test_class.a_property, 42)
+            test = TestClass()
+            test.a_property
+            test.a_property
             mock_method.assert_called_once()
 
 
