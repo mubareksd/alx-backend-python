@@ -79,7 +79,8 @@ class TestGithubOrgClient(unittest.TestCase):
     TEST_PAYLOAD
 ])
 class TestIntegrationGithubOrgClient(unittest.TestCase):
-    """TestIntegrationGithubOrgClient class that inherits from unittest.TestCase
+    """TestIntegrationGithubOrgClient class that,
+    inherits from unittest.TestCase
     """
 
     def setUp(self) -> None:
