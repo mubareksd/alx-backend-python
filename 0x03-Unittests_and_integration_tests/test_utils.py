@@ -39,6 +39,9 @@ class TestAccessNestedMap(unittest.TestCase):
             nested_map (dict): nested map to test
             path (tuple): path of keys to access in nested map
             expected (any): expected return value
+        
+        Raises:
+            expected: expected exception
         """
         with self.assertRaises(expected):
             access_nested_map(nested_map, path)
