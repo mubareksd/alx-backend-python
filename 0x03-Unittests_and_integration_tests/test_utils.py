@@ -2,8 +2,8 @@
 """test_utils module
 """
 import unittest
-from parameterized import parameterized
 from unittest.mock import patch
+from parameterized import parameterized
 
 from utils import access_nested_map, get_json, memoize
 
@@ -48,6 +48,8 @@ class TestAccessNestedMap(unittest.TestCase):
 
 
 class TestGetJson(unittest.TestCase):
+    """TestGetJson class that inherits from unittest.TestCase
+    """
     @parameterized.expand([
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False})
@@ -65,10 +67,14 @@ class TestGetJson(unittest.TestCase):
 
 
 class TestMemoize(unittest.TestCase):
+    """TestMemoize class that inherits from unittest.TestCase
+    """
     def test_memoize(self):
         """Test that when calling a_property twice, the correct result
         """
         class TestClass:
+            """TestClass class
+            """
             def a_method(self):
                 """a_method method that returns an int
 
