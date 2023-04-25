@@ -36,7 +36,7 @@ class TestGithubOrgClient(unittest.TestCase):
                    new_callable=PropertyMock) as mock_org:
             mock_org.return_value = {'repos_url': 'google'}
             client = GithubOrgClient('google')
-            self.assertEqual(client._public_repos_url,
+            self.assertEqual(client.repos_payload,
                              mock_org.return_value['repos_url'])
 
     @patch('client.get_json')
@@ -82,19 +82,14 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     """TestIntegrationGithubOrgClient class that,
     inherits from unittest.TestCase
     """
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.get_patcher = patch('requests.get', new=MagicMock())
+        cls.mock_get = cls.get_patcher.start()
 
-    def setUp(self) -> None:
-        """setUp function that, starts the patcher
-        """
-        self.get_patcher = patch('requests.get', new=MagicMock())
-        self.mock_get = self.get_patcher.start()
-        return super().setUp()
-
-    def tearDown(self) -> None:
-        """tearDown function that, stops the patcher
-        """
-        self.get_patcher.stop()
-        return super().tearDown()
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.get_patcher.stop()
 
 
 if __name__ == "__main__":
