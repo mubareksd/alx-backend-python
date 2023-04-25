@@ -3,7 +3,7 @@
 """
 import unittest
 from parameterized import parameterized, parameterized_class
-from unittest.mock import patch, PropertyMock
+from unittest.mock import MagicMock, patch, PropertyMock
 
 from client import GithubOrgClient
 from fixtures import TEST_PAYLOAD
@@ -25,7 +25,7 @@ class TestGithubOrgClient(unittest.TestCase):
             org_name (String): organization name
             mock_get_json ([type]): [description]
         """
-        mock_get_json.return_value = {'login': org_name}
+        mock_get_json.return_value = {'payload': True}
         client = GithubOrgClient(org_name)
         self.assertEqual(client.org, mock_get_json.return_value)
         mock_get_json.assert_called_once()
@@ -85,10 +85,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
     @classmethod
     def setUp(self) -> None:
-        self.get_patcher = patch('requests.get', side_effect=[
-            self.org_payload, self.repos_payload,
-            self.org_payload, self.repos_payload
-        ])
+        self.get_patcher = patch('requests.get', new=MagicMock())
         self.mock_get = self.get_patcher.start()
 
     @classmethod
