@@ -9,7 +9,7 @@ from utils import access_nested_map, get_json, memoize
 
 
 class TestAccessNestedMap(unittest.TestCase):
-    """TestAccessNestedMap class
+    """TestAccessNestedMap class that inherits from unittest.TestCase
     """
     @parameterized.expand([
         ({"a": 1}, ("a",), 1),
@@ -17,11 +17,12 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": {"b": 2}}, ("a", "b"), 2)
     ])
     def test_access_nested_map(self, nested_map, path, expected):
-        """test_access_nested_map function
+        """test_access_nested_map function that,
+        tests access_nested_map function
 
         Args:
-            nested_map (dict): nested map
-            path (tuple): path to access value
+            nested_map (dict): nested map to test
+            path (tuple): path of keys to access in nested map
             expected (any): expected return value
         """
         self.assertEqual(access_nested_map(nested_map, path), expected)
@@ -31,23 +32,29 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": 1}, ("a", "b"), KeyError)
     ])
     def test_access_nested_map_exception(self, nested_map, path, expected):
+        """test_access_nested_map_exception function that,
+        tests access_nested_map function with exception
+
+        Args:
+            nested_map (dict): nested map to test
+            path (tuple): path of keys to access in nested map
+            expected (any): expected return value
+        """
         with self.assertRaises(expected):
             access_nested_map(nested_map, path)
 
 
 class TestGetJson(unittest.TestCase):
-    """TestGetJson class
-    """
     @parameterized.expand([
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False})
     ])
     def test_get_json(self, url, test_payload):
-        """test_get_json function
+        """test_get_json function that tests get_json function
 
         Args:
-            url (string): url to get json
-            test_payload (dict): test payload
+            url (str): url to test
+            tet_payload (dict): expected return value
         """
         with patch('utils.requests.get') as mock_get:
             mock_get.return_value.json.return_value = test_payload
@@ -55,15 +62,12 @@ class TestGetJson(unittest.TestCase):
 
 
 class TestMemoize(unittest.TestCase):
-    """TestMemoize class
-    """
     def test_memoize(self):
+        """Test that when calling a_property twice, the correct result
+        """
         class TestClass:
-            """TestClass class
-            """
-
             def a_method(self):
-                """a_method function
+                """a_method method that returns an int
 
                 Returns:
                     int: 42
@@ -72,10 +76,10 @@ class TestMemoize(unittest.TestCase):
 
             @memoize
             def a_property(self):
-                """a_property function
+                """a_property method that returns a memoized value
 
                 Returns:
-                    method: a_method
+                    method: a_method return value
                 """
                 return self.a_method()
 
