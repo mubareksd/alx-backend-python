@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""test_client module
+"""test_client module that tests client module
 """
 import unittest
+from typing import Dict
 from unittest.mock import MagicMock, patch, PropertyMock
 from parameterized import parameterized, parameterized_class
 
@@ -13,20 +14,20 @@ class TestGithubOrgClient(unittest.TestCase):
     """TestGithubOrgClient class that inherits from unittest.TestCase
     """
     @parameterized.expand([
-        ('google'),
-        ('abc')
+        ('google', {'login': 'google'}),
+        ('abc', {'login': 'abc'})
         ])
     @patch('client.get_json')
-    def test_org(self, org_name: str, mock_get_json: MagicMock):
+    def test_org(self, org_name: str, res: Dict, mock_get_json: MagicMock):
         """test_org function that tests org function
 
         Args:
             org_name (String): organization name to test
             mock_get_json (MagicMock): mock get_json function from client
         """
-        mock_get_json.return_value = {'payload': True}
+        mock_get_json.return_value = MagicMock(return_value=res)
         client = GithubOrgClient(org_name)
-        self.assertEqual(client.org, mock_get_json.return_value)
+        self.assertEqual(client.org(), res)
         mock_get_json.assert_called_once()
 
     def test_public_repos_url(self):
