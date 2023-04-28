@@ -2,11 +2,12 @@
 """test_client module that tests client module
 """
 import unittest
-from unittest.mock import PropertyMock, patch
+from unittest.mock import PropertyMock, patch, MagicMock
 from typing import Dict
-from parameterized import parameterized
+from parameterized import parameterized, parameterized_class
 
 from client import GithubOrgClient
+from fixtures import TEST_PAYLOAD
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -72,3 +73,21 @@ class TestGithubOrgClient(unittest.TestCase):
         """
         self.assertEqual(GithubOrgClient.has_license(repo, license_key),
                          expected)
+
+
+@parameterized_class(
+    ('org_payload', 'repos_payload', 'expected_repos', 'apache2_repos'),
+    TEST_PAYLOAD,
+)
+class TestIntegrationGithubOrgClient(unittest.TestCase):
+    """TestIntegrationGithubOrgClient class that tests integration of
+    """
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.get_patcher = patch("requests.get", new=MagicMock())
+        cls.mock_get = cls.get_patcher.start()
+    
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.get_patcher.stop()
+    
