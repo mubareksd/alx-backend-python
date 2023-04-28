@@ -3,4 +3,5 @@ import unittest
 
 
 class TestGithubOrgClient(unittest.TestCase):
-    pass
+    def test_org(self):
+        pass
