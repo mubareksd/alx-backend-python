@@ -13,11 +13,11 @@ class TestGithubOrgClient(unittest.TestCase):
     """TestGithubOrgClient class that tests GithubOrgClient class
     """
     @parameterized.expand([
-        ("google", {"login": "google"}),
-        ("abc", {"message": "Not Found"}),
+        ("google"),
+        ("abc"),
     ])
     @patch('client.get_json')
-    def test_org(self, org_name: str, expected: Dict,
+    def test_org(self, org_name: str,
                  mock_get_json: unittest.mock.Mock) -> None:
         """test_org function that tests org method
 
@@ -26,9 +26,10 @@ class TestGithubOrgClient(unittest.TestCase):
             expected (Dict): expected return value
             mock_get_json (unittest.mock.Mock): mock get_json
         """
-        mock_get_json.return_value = expected
+        org = {"payload": True}
+        mock_get_json.return_value = org
         client = GithubOrgClient(org_name)
-        self.assertEqual(client.org, expected)
+        self.assertEqual(client.org, org)
         mock_get_json.assert_called_once()
 
     def test_public_repos_url(self):
