@@ -17,7 +17,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ('abc')
         ])
     @patch('client.get_json')
-    def test_org(self, org_name, mock_get_json):
+    def test_org(self, org_name: str, mock_get_json: MagicMock):
         """test_org function that tests org function
 
         Args:
