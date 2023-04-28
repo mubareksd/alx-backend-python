@@ -13,7 +13,8 @@ class TestGithubOrgClient(unittest.TestCase):
     """TestGithubOrgClient class that tests GithubOrgClient class
     """
     @parameterized.expand([
-        ('google', {'login': 'google'})
+        ('google', {'login': 'google'}),
+        ('abc', {'message': 'Not Found'})
     ])
     @patch('client.get_json')
     def test_org(self, org_name: str, ret: Dict, mock_get_json: MagicMock) -> None:
