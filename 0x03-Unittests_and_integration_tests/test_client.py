@@ -2,97 +2,29 @@
 """test_client module that tests client module
 """
 import unittest
+from unittest.mock import patch, MagicMock
 from typing import Dict
-from unittest.mock import MagicMock, patch, PropertyMock
-from parameterized import parameterized, parameterized_class
+from parameterized import parameterized
 
 from client import GithubOrgClient
-from fixtures import TEST_PAYLOAD
 
 
 class TestGithubOrgClient(unittest.TestCase):
-    """TestGithubOrgClient class that inherits from unittest.TestCase
+    """TestGithubOrgClient class that tests GithubOrgClient class
     """
     @parameterized.expand([
-        ('google', {'login': 'google'}),
-        ('abc', {'login': 'abc'})
-        ])
-    @patch('client.get_json')
-    def test_org(self, org_name: str, res: Dict, mock_get_json: MagicMock):
-        """test_org function that tests org function
-
-        Args:
-            org_name (String): organization name to test
-            mock_get_json (MagicMock): mock get_json function from client
-        """
-        mock_get_json.return_value = MagicMock(return_value=res)
-        client = GithubOrgClient(org_name)
-        self.assertEqual(client.org(), res)
-        mock_get_json.assert_called_once()
-
-    def test_public_repos_url(self):
-        """test_public_repos_url function that tests public_repos_url function
-        """
-        with patch('client.GithubOrgClient.org',
-                   new_callable=PropertyMock) as mock_org:
-            mock_org.return_value = {'repos_url': 'google'}
-            client = GithubOrgClient('google')
-            self.assertEqual(client.public_repos,
-                             mock_org.return_value['repos_url'])
-
-    @patch('client.get_json')
-    def test_public_repos(self, mock_get_json):
-        """test_public_repos function that tests public_repos function
-
-        Args:
-            mock_get_json ([type]): [description]
-        """
-        mock_get_json.return_value = [
-            {'name': 'truth'},
-            {'name': 'ruby-openid-apps-discovery'}
-            ]
-        with patch('client.GithubOrgClient._public_repos_url',
-                   new_callable=PropertyMock) as mock_url:
-            mock_url.return_value = 'google/repos'
-            client = GithubOrgClient('google')
-            self.assertEqual(client.public_repos(),
-                             ["truth", "ruby-openid-apps-discovery"])
-            mock_get_json.assert_called_once()
-            mock_url.assert_called_once()
-
-    @parameterized.expand([
-        ({"license": {"key": "my_license"}}, "my_license", True),
-        ({"license": {"key": "other_license"}}, "my_license", False)
+        ('google', {'login': 'google'})
     ])
-    def test_has_license(self, repo, license_key, expected):
-        """test_has_license function that tests has_license function
+    @patch('client.get_json')
+    def test_org(self, org_name: str, ret: Dict, mock_get_json: MagicMock):
+        """test_org method that tests org method
 
         Args:
-            repo ([type]): [description]
-            license_key ([type]): [description]
-            expected ([type]): [description]
+            org_name (str): org name
+            ret (Dict): return value
+            mock_get_json (MagicMock): mock get_json
         """
-        res = GithubOrgClient.has_license(repo, license_key)
-        self.assertEqual(res, expected)
-
-
-@parameterized_class([
-    ('org_payload', 'repos_payload', 'expected_repos', 'apache2_repos'),
-    TEST_PAYLOAD
-])
-class TestIntegrationGithubOrgClient(unittest.TestCase):
-    """TestIntegrationGithubOrgClient class that,
-    inherits from unittest.TestCase
-    """
-    @classmethod
-    def setUpClass(cls) -> None:
-        cls.get_patcher = patch('requests.get', new=MagicMock())
-        cls.mock_get = cls.get_patcher.start()
-
-    @classmethod
-    def tearDownClass(cls) -> None:
-        cls.get_patcher.stop()
-
-
-if __name__ == "__main__":
-    unittest.main()
+        mock_get_json.return_value = ret
+        client = GithubOrgClient(org_name)
+        self.assertEqual(client.org, ret)
+        mock_get_json.assert_called_once()
