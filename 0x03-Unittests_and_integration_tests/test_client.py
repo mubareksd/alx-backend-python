@@ -2,8 +2,7 @@
 """test_client module that tests client module
 """
 import unittest
-from unittest.mock import patch, MagicMock
-from typing import Dict
+from unittest.mock import patch
 from parameterized import parameterized
 
 from client import GithubOrgClient
@@ -17,7 +16,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ('abc')
     ])
     @patch('client.get_json')
-    def test_org(self, org_name: str, mock_get_json: MagicMock) -> None:
+    def test_org(self, org_name, mock_get_json):
         """test_org method that tests org method
 
         Args:
@@ -25,7 +24,8 @@ class TestGithubOrgClient(unittest.TestCase):
             ret (Dict): return value
             mock_get_json (MagicMock): mock get_json
         """
-        mock_get_json.return_value = {'payload': True}
         client = GithubOrgClient(org_name)
-        self.assertEqual(client.org, mock_get_json.return_value)
-        mock_get_json.assert_called_once()
+        client.org()
+        mock_get_json.assert_called_once_with(
+            "https://api.github.com/orgs/{}".format(org_name)
+        )
