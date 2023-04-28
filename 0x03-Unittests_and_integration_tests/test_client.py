@@ -41,3 +41,17 @@ class TestGithubOrgClient(unittest.TestCase):
             mock_org.return_value = org
             client = GithubOrgClient("test")
             self.assertEqual(client._public_repos_url, org["repos_url"])
+
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False)
+    ])
+    def test_has_license(self, repo: Dict, license_key: str, expected: bool) -> None:
+        """test_has_license function that tests _has_license method
+
+        Args:
+            repo (Dict): repo dict
+            license_key (str): license key
+        """
+        client = GithubOrgClient("test")
+        self.assertEqual(client.has_license(repo, license_key), expected)
