@@ -27,3 +27,4 @@ class TestGithubOrgClient(unittest.TestCase):
         mock_get_json.return_value = {"login": org_name}
         client = GithubOrgClient(org_name)
         self.assertEqual(client.org, mock_get_json.return_value)
+        mock_get_json.assert_called_once_with()
