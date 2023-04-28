@@ -25,6 +25,7 @@ class TestGithubOrgClient(unittest.TestCase):
             ret (Dict): return value
             mock_get_json (MagicMock): mock get_json
         """
+        mock_get_json.return_value = {'payload': True}
         client = GithubOrgClient(org_name)
         self.assertEqual(client.org, mock_get_json.return_value)
         mock_get_json.assert_called_once()
